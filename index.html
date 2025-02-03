@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your file was not found</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #5f6368;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: normal;
+      margin: 0;
+    }
+    p {
+      font-size: 14px;
+      margin: 8px 0;
+    }
+    .error-icon {
+      margin-bottom: 20px;
+    }
+    .error-icon svg {
+      width: 72px;
+      height: 72px;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2zm0-10h2v8h-2z" fill="#E8EAED"></path>
+    </svg>
+  </div>
+  <h1>Your file was not found</h1>
+  <p>It may have been moved or deleted.</p>
+  <p>ERR_FILE_NOT_FOUND</p>
+
+  <script>
+    let sPressCount = 0;
+
+    // Detect "s" keypress 3 times to open iframe
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 's' || event.key === 'S') {
+        sPressCount++;
+        if (sPressCount === 3) {
+          openIframe();
+        }
+      }
+    });
+
+    // Open iframe in a new tab and close the original page
+    function openIframe() {
+      const newTab = window.open('', '_blank'); // Open a new blank tab
+      if (newTab) {
+        newTab.document.write(`
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title></title>
+            <style>
+              body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: black;
+              }
+              iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+              }
+            </style>
+          </head>
+          <body>
+            <iframe src="https://www.easyfun.gg"></iframe>
+          </body>
+          </html>
+        `);
+        // Close the current window (the file not found page)
+        window.close();
+      }
+    }
+  </script>
+</body>
+</html>
